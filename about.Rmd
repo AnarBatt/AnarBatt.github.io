@@ -2,4 +2,43 @@
 title: "About Me"
 ---
 
-Write your professional biography here. You can list your technical skills, work experience, or educational background.
+## Professional Profile
+Statistician with a strong foundation in predictive analytics, A/B-testing methodologies, and privacy-preserving data synthesis. Experienced in translating complex mathematical equations into scalable, production-ready code blocks. 
+
+---
+
+## 🛠️ Technical Toolkit
+*   **Programming Languages**: R (Expert), Python, SQL, C++, SAS
+*   **Tools & Frameworks**: Git/GitHub, RStudio, Roxygen2, Testthat, MS Office
+*   **Statistical Domains**: Bayesian Inference, Multiple Imputation (FCS), Experimental Design, Multivariate Layouts
+
+---
+
+## 🎓 Education
+### **B.Sc. in Statistics** | LMU München
+*09/2019 — 04/2026* | *Munich, Germany*
+*   **Minor Focus**: Insurance and Risk Management
+*   **Bachelor Thesis**: *"Synthetic Data Generation of linked datasets of the German Socio-Economic Panel (SOEP)"* (Thesis Grade: 1.7 | Disputation: 1.3)
+
+### **B.Sc. Computational Sciences** | ETH Zürich
+*09/2016 — 02/2019* | *Zurich, Switzerland*
+
+---
+
+## 💼 Selected Experience
+### **Reservation Agent** | Z.T. Hotel GmbH
+*08/2021 — Present* | *Berlin, Germany (Remote)*
+*   Managed data structure validation and contract auditing within centralized property management databases.
+*   Led predictive inventory analysis and performance checks regarding commission auditing metrics.
+
+### **Hotelfachassistenz / Operations** | Hotel Am Buschkrugpark
+*07/2017 — 09/2020* | *Berlin, Germany*
+*   **Digitalization Project**: Planned and executed database migration to a modernized platform syncing reservation layouts with accounting engines (DATEV), automating repetitive data processing overhead.
+
+---
+
+## 🗣️ Languages
+*   **German**: Native / Muttersprache
+*   **Mongolian**: Native / Muttersprache
+*   **English**: Fluent (C1 Professional)
+*   **Spanish**: Intermediate (B1)

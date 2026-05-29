@@ -1,12 +1,58 @@
 ---
-title: "My Projects"
+title: "Data Science & Statistics Portfolios"
 ---
 
-## Project Categories
+Welcome to my portfolio showcase. Below are the core projects detailing my work in statistical software engineering, machine learning pipelines, and experimental web-traffic optimization.
 
-### 📊 Data Analysis
-*   [Project 1 Title](https://github.com) - A short description of your first analysis project.
-*   [Project 2 Title](https://github.com) - A short description of your second analysis project.
+---
 
-### 💻 Web Development
-*   [Project 3 Title](https://github.com) - Details about a tool or web app you built.
+## 📦 1. MDS-R-Package: Multidimensional Scaling Tools
+**Tech Stack:** `R`, `Roxygen2`, `Testthat`, `Git`
+
+This repository hosts a fully functional, open-source R package engineered for mathematical dimensionality reduction and data visualization.
+
+*   **Mathematical Translation:** Programmed native R algorithms to translate complex matrix mechanics directly into performant code.
+*   **Key Implementations:** Coded double centering procedures and eigenvalue decompositions manually without external package dependencies.
+*   **Software Quality Standards:** Implemented structured modular file architectures, comprehensive functional inline documentation, and robust automated unit test suites.
+
+👉 **[View Code Repository](https://github.com)** *(Placeholder Link)*
+
+---
+
+## 🔒 2. Synthetic Data Generation Framework (SOEP)
+**Tech Stack:** `R`, `Machine Learning (CART)`, `Multiple Imputation`
+
+Developed as part of my Bachelor's thesis at LMU, this project provides data-privacy simulation pipelines for high-dimensional, complex longitudinal panel files.
+
+*   **Algorithmic Modeling:** Deployed Classification and Regression Trees (CART) alongside fully conditional specifications (FCS) to generate fully synthetic data matrix variants.
+*   **Utility Metrics Validation:** Evaluated information-loss tradeoffs by validating Global Utility indexes and Outcome Utility indicators.
+*   **Privacy Guardrails:** Conducted strict data-leakage and re-identification disclosure risk testing using mathematical $k$-anonymity and $l$-diversity checks.
+
+👉 **[View Simulation Repository](https://github.com)** *(Placeholder Link)*
+
+---
+
+## 📊 3. E-Commerce A/B-Testing Framework
+**Tech Stack:** `R`, `Bayesian Statistics`, `Hypothesis Testing`
+
+An enterprise-ready analytics framework built during a collaborative consulting laboratory with Adidas AG to optimize digital platform traffic.
+
+*   **Large-Scale Inference:** Computed conversions, Average Order Value (AOV), and Revenue per Visitor (RPV) metrics across a dataset of over 3 million user sessions.
+*   **Advanced Error Control:** Controlled false positives across dense multi-arm comparisons by enforcing Family-Wise Error Rate (FWER) and False Discovery Rate (FDR) restrictions.
+*   **Biasing Mitigation:** Extracted subtle hardware and software compounding variables using data post-stratification segmentation layers.
+*   **Magnitude Auditing:** Integrated advanced Type-S (sign error) and Type-M (magnitude exaggeration error) diagnostic metrics to complement classical alpha power limits.
+
+👉 **[View Testing Framework](https://github.com)** *(Placeholder Link)*
+
+---
+
+## 🗳️ 4. UK Elections Exploratory Data Analysis (EDA)
+**Tech Stack:** `R`, `Multivariate Correlation`, `ggplot2`
+
+An exploratory data visualization and inferential project evaluating voting trends across the UK Parliament cycles and Brexit referendum events.
+
+*   **Categorization Architectures:** Formulated custom conditional mapping matrices to cluster disparate regional political parties by explicit Brexit positions.
+*   **Confounding Resolution:** Investigated voter selection biases and constituency demographic variations by parsing complex localized aggregate data files.
+*   **Visual Discovery:** Plotted multivariate trend matrices to visually expose correlations between socio-demographic indicators and voting behaviors.
+
+👉 **[View EDA Repository](https://github.com)** *(Placeholder Link)*

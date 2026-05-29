@@ -1,7 +1,21 @@
 ---
-title: "Welcome to My Website"
+title: "Anar Battaivan | Portfolio & Statistics"
 ---
 
-Hello! This is the main landing page of my website. 
+# Welcome! 📊
 
-Use the navigation bar at the top to browse through my projects or learn more about me.
+I am a **Statistics graduate** from the Ludwig-Maximilians-Universität München (LMU) specializing in data science, statistical modeling, and computational methods. 
+
+My work bridges the gap between theoretical mathematical frameworks and practical, high-performance software tools. 
+
+### Core Specializations & Project Highlights:
+*   **Statistical Software Engineering**: Developed custom R-packages from scratch for complex workflows like Multidimensional Scaling (MDS).
+*   **Privacy & Machine Learning**: Evaluated synthetic data generation pipelines using Classification and Regression Trees (CART) on major panel data.
+*   **E-Commerce A/B-Testing**: Conducted massive-scale web traffic analysis using both Frequentist and Bayesian estimation methods.
+
+---
+
+### Explore My Work
+🗺️ Check out my comprehensive **[Projects Page](projects.html)** to see my code repositories, interactive frameworks, and exploratory analysis reports.
+
+💼 Learn more about my academic background, technical competencies, and professional journey on my **[About Me](about.html)** page.
