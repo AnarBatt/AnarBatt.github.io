@@ -1,0 +1,7 @@
+---
+title: "Welcome to My Website"
+---
+
+Hello! This is the main landing page of my website. 
+
+Use the navigation bar at the top to browse through my projects or learn more about me.

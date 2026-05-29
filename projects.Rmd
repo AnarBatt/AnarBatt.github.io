@@ -1,0 +1,12 @@
+---
+title: "My Projects"
+---
+
+## Project Categories
+
+### 📊 Data Analysis
+*   [Project 1 Title](https://github.com) - A short description of your first analysis project.
+*   [Project 2 Title](https://github.com) - A short description of your second analysis project.
+
+### 💻 Web Development
+*   [Project 3 Title](https://github.com) - Details about a tool or web app you built.
