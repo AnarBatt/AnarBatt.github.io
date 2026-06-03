@@ -1,0 +1,29 @@
+---
+title: "A/B Testing Project Page"
+---
+
+## Overview
+This is a placeholder page for the A/B testing project. 
+
+---
+
+## Content Section 1
+Dummy text explaining the project setup goes here.
+
+### Subheading
+More placeholder text to test out the visual layout of this subpage.
+
+---
+
+## Content Section 2
+*   Dummy bullet point number one.
+*   Dummy bullet point number two.
+
+```{r test-plot}
+# Simple placeholder plot to test R Markdown capabilities
+plot(1:10, main = "Test Plot", xlab = "X Axis", ylab = "Y Axis")
+```
+
+---
+
+[Back to Projects Page](projects.html)

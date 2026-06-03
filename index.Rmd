@@ -2,7 +2,7 @@
 title: "Anar Battaivan | Portfolio & Statistics"
 ---
 
-# Welcome! 📊
+# Welcome!
 
 I am a **Statistics graduate** from the Ludwig-Maximilians-Universität München (LMU) specializing in data science, statistical modeling, and computational methods. 
 
@@ -16,6 +16,6 @@ My work bridges the gap between theoretical mathematical frameworks and practica
 ---
 
 ### Explore My Work
-🗺️ Check out my comprehensive **[Projects Page](projects.html)** to see my code repositories, interactive frameworks, and exploratory analysis reports.
+* Check out my comprehensive **[Projects Page](projects.html)** to see my code repositories, interactive frameworks, and exploratory analysis reports.
 
-💼 Learn more about my academic background, technical competencies, and professional journey on my **[About Me](about.html)** page.
+* Learn more about my academic background, technical competencies, and professional journey on my **[About Me](about.html)** page.

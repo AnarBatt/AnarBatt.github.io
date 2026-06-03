@@ -6,7 +6,7 @@ Welcome to my portfolio showcase. Below are the core projects detailing my work 
 
 ---
 
-## 📦 1. MDS-R-Package: Multidimensional Scaling Tools
+## 1. MDS-R-Package: Multidimensional Scaling Tools
 **Tech Stack:** `R`, `Roxygen2`, `Testthat`, `Git`
 
 This repository hosts a fully functional, open-source R package engineered for mathematical dimensionality reduction and data visualization.
@@ -15,11 +15,11 @@ This repository hosts a fully functional, open-source R package engineered for m
 *   **Key Implementations:** Coded double centering procedures and eigenvalue decompositions manually without external package dependencies.
 *   **Software Quality Standards:** Implemented structured modular file architectures, comprehensive functional inline documentation, and robust automated unit test suites.
 
-👉 **[View Code Repository](https://github.com)** *(Placeholder Link)*
+**[View Code Repository](https://github.com)** *(Placeholder Link)*
 
 ---
 
-## 🔒 2. Synthetic Data Generation Framework (SOEP)
+## 2. Synthetic Data Generation Framework (SOEP)
 **Tech Stack:** `R`, `Machine Learning (CART)`, `Multiple Imputation`
 
 Developed as part of my Bachelor's thesis at LMU, this project provides data-privacy simulation pipelines for high-dimensional, complex longitudinal panel files.
@@ -28,11 +28,12 @@ Developed as part of my Bachelor's thesis at LMU, this project provides data-pri
 *   **Utility Metrics Validation:** Evaluated information-loss tradeoffs by validating Global Utility indexes and Outcome Utility indicators.
 *   **Privacy Guardrails:** Conducted strict data-leakage and re-identification disclosure risk testing using mathematical $k$-anonymity and $l$-diversity checks.
 
-👉 **[View Simulation Repository](https://github.com)** *(Placeholder Link)*
+**[Read Full Bachelor Thesis (PDF)](docs/Anar_Battaivan_thesis_SOEP_digital.pdf)** <br>
+**[View Simulation Repository](https://github.com)** *(Placeholder Link)*
 
 ---
 
-## 📊 3. E-Commerce A/B-Testing Framework
+## 3. E-Commerce A/B-Testing Framework
 **Tech Stack:** `R`, `Bayesian Statistics`, `Hypothesis Testing`
 
 An enterprise-ready analytics framework built during a collaborative consulting laboratory with Adidas AG to optimize digital platform traffic.
@@ -42,11 +43,11 @@ An enterprise-ready analytics framework built during a collaborative consulting 
 *   **Biasing Mitigation:** Extracted subtle hardware and software compounding variables using data post-stratification segmentation layers.
 *   **Magnitude Auditing:** Integrated advanced Type-S (sign error) and Type-M (magnitude exaggeration error) diagnostic metrics to complement classical alpha power limits.
 
-👉 **[View Testing Framework](https://github.com)** *(Placeholder Link)*
+**[Read the Full Analysis Report](ab_testing.html)** 
 
 ---
 
-## 🗳️ 4. UK Elections Exploratory Data Analysis (EDA)
+## 4. UK Elections Exploratory Data Analysis (EDA)
 **Tech Stack:** `R`, `Multivariate Correlation`, `ggplot2`
 
 An exploratory data visualization and inferential project evaluating voting trends across the UK Parliament cycles and Brexit referendum events.
@@ -55,4 +56,4 @@ An exploratory data visualization and inferential project evaluating voting tren
 *   **Confounding Resolution:** Investigated voter selection biases and constituency demographic variations by parsing complex localized aggregate data files.
 *   **Visual Discovery:** Plotted multivariate trend matrices to visually expose correlations between socio-demographic indicators and voting behaviors.
 
-👉 **[View EDA Repository](https://github.com)** *(Placeholder Link)*
+**[View EDA Repository](https://github.com)** *(Placeholder Link)*
