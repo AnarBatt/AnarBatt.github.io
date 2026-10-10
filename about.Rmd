@@ -2,43 +2,52 @@
 title: "About Me"
 ---
 
-## Professional Profile
-Statistician with a strong foundation in predictive analytics, A/B-testing methodologies, and privacy-preserving data synthesis. Experienced in translating complex mathematical equations into scalable, production-ready code blocks. 
-
----
+```{=html}
+<div class="card profile-card">
+  <img class="profile-photo" src="images/anar.jpg"
+       alt="Portrait of Anar Battaivan"
+       onerror="this.style.display='none'" />
+  <div class="profile-text">
+    <h2 style="margin-top:0;">Professional Profile</h2>
+    <p>Statistician with a strong foundation in predictive analytics, A/B-testing
+    methodologies, and privacy-preserving data synthesis. Experienced in translating
+    complex mathematical equations into scalable, production-ready code blocks.</p>
+  </div>
+</div>
+```
 
 ## 🛠️ Technical Toolkit
-*   **Programming Languages**: R (Expert), Python, SQL, C++, SAS
-*   **Tools & Frameworks**: Git/GitHub, RStudio, Roxygen2, Testthat, MS Office
-*   **Statistical Domains**: Bayesian Inference, Multiple Imputation (FCS), Experimental Design, Multivariate Layouts
+*   **Programming Languages:** `R (Expert)` · `Python` · `SQL` · `C++` · `SAS`
+*   **Tools & Frameworks:** `Git/GitHub` · `RStudio` · `Roxygen2` · `Testthat` · `MS Office`
+*   **Statistical Domains:** `Bayesian Inference` · `Multiple Imputation (FCS)` · `Experimental Design` · `Multivariate Layouts`
 
 ---
 
 ## 🎓 Education
-### **B.Sc. in Statistics** | LMU München
+### B.Sc. in Statistics | LMU München
 *09/2019 — 04/2026* | *Munich, Germany* <br>
-   **Minor Focus**: Insurance and Risk Management <br>
-   **Bachelor Thesis**: *"Synthetic Data Generation of linked datasets of the German Socio-Economic Panel (SOEP)"*
+**Minor Focus:** Insurance and Risk Management <br>
+**Bachelor Thesis:** *"Synthetic Data Generation of linked datasets of the German Socio-Economic Panel (SOEP)"*
 
-### **B.Sc. Computational Science and Engineering** | ETH Zürich
+### B.Sc. Computational Science and Engineering | ETH Zürich
 *09/2016 — 02/2019* | *Zurich, Switzerland*
 
 ---
 
 ## 💼 Selected Experience
-### **Reservation Agent** | Z.T. Hotel GmbH
+### Reservation Agent | Z.T. Hotel GmbH
 *08/2021 — Present* | *Berlin, Germany (Remote)* <br>
-  Managed data structure validation and contract auditing within centralized property management databases.
-  Led predictive inventory analysis and performance checks regarding commission auditing metrics.
+Managed data structure validation and contract auditing within centralized property management databases.
+Led predictive inventory analysis and performance checks regarding commission auditing metrics.
 
-### **Hotel Management Assistent / Operations** | Hotel Am Buschkrugpark
+### Hotel Management Assistent / Operations | Hotel Am Buschkrugpark
 *07/2017 — 09/2020* | *Berlin, Germany* <br>
-  **Digitalization Project**: Planned and executed database migration to a modernized platform syncing reservation layouts with accounting engines (DATEV), automating repetitive data processing overhead.
+**Digitalization Project:** Planned and executed database migration to a modernized platform syncing reservation layouts with accounting engines (DATEV), automating repetitive data processing overhead.
 
 ---
 
 ## 🗣️ Languages
-*   **German**: Native / Muttersprache
-*   **Mongolian**: Native / Muttersprache
-*   **English**: Fluent (C1 Professional)
-*   **Spanish**: Intermediate (B1)
+*   **German:** Native / Muttersprache
+*   **Mongolian:** Native / Muttersprache
+*   **English:** Fluent (C1 Professional)
+*   **Spanish:** Intermediate (B1)

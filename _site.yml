@@ -1,6 +1,6 @@
 name: "AnarBatt-website"
 navbar:
-  title: "My Portfolio"
+  title: "Anar Battaivan"
   left:
     - text: "Home"
       href: index.html
@@ -12,3 +12,6 @@ output:
   html_document:
     theme: cosmo
     highlight: textmate
+    css: styles.css
+    include:
+      in_header: header.html

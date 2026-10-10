@@ -1,0 +1,284 @@
+/* ============================================================
+   Anar Battaivan — Portfolio custom theme
+   Clean & professional overlay on top of the cosmo Bootstrap theme
+   ============================================================ */
+
+/* ---- Typography (self-hosted-friendly Google font via CDN) ---- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap');
+
+:root {
+  --accent:        #1f6feb;   /* primary accent (deep blue)   */
+  --accent-dark:   #1a4b9c;   /* darker shade for hovers      */
+  --accent-soft:   #e8f0fe;   /* light tint for backgrounds   */
+  --ink:           #1c2430;   /* main text                    */
+  --ink-soft:      #5b6775;   /* secondary text               */
+  --line:          #e7ebf0;   /* hairline borders             */
+  --bg:            #ffffff;
+  --bg-alt:        #f7f9fc;   /* subtle section background    */
+  --radius:        14px;
+  --shadow:        0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+}
+
+/* ---- Base ---- */
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--bg);
+  font-size: 16px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Constrain reading width + breathing room */
+.main-container {
+  max-width: 860px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* ---- Headings ---- */
+h1, h2, h3, h4, h5 {
+  font-family: 'Source Serif 4', Georgia, 'Times New Roman', serif;
+  color: var(--ink);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+}
+h1 { font-size: 2.1rem; margin-top: 2.2rem; }
+h2 {
+  font-size: 1.55rem;
+  margin-top: 2.4rem;
+  padding-bottom: .4rem;
+  border-bottom: 1px solid var(--line);
+}
+h3 { font-size: 1.2rem; margin-top: 1.6rem; color: var(--accent-dark); }
+
+/* Convert <hr> into airy spacers instead of hard lines */
+hr {
+  border: 0;
+  height: 1px;
+  background: var(--line);
+  margin: 2.6rem 0;
+}
+
+/* ---- Links ---- */
+a {
+  color: var(--accent);
+  text-decoration: none;
+  transition: color .15s ease, border-color .15s ease;
+}
+a:hover, a:focus {
+  color: var(--accent-dark);
+  text-decoration: none;
+  border-bottom: 1px solid var(--accent-dark);
+}
+
+/* ---- Navbar ---- */
+.navbar-default {
+  background: rgba(255,255,255,.9);
+  backdrop-filter: saturate(180%) blur(8px);
+  border: 0;
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 1px 3px rgba(16,24,40,.04);
+}
+.navbar-default .navbar-brand {
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-weight: 600;
+  color: var(--ink);
+  font-size: 1.15rem;
+}
+.navbar-default .navbar-nav > li > a {
+  color: var(--ink-soft);
+  font-weight: 500;
+  border-bottom: 2px solid transparent;
+  transition: color .15s ease, border-color .15s ease;
+}
+.navbar-default .navbar-nav > li > a:hover,
+.navbar-default .navbar-nav > li > a:focus {
+  color: var(--accent);
+  background: transparent;
+}
+.navbar-default .navbar-nav > .active > a,
+.navbar-default .navbar-nav > .active > a:hover,
+.navbar-default .navbar-nav > .active > a:focus {
+  color: var(--accent);
+  background: transparent;
+  border-bottom: 2px solid var(--accent);
+}
+
+/* ---- Hero banner (used on the home page) ---- */
+.hero {
+  margin: 1.5rem 0 2.5rem;
+  padding: 3rem 2.4rem;
+  border-radius: var(--radius);
+  background:
+    radial-gradient(1200px 400px at -10% -40%, var(--accent-soft), transparent 60%),
+    linear-gradient(135deg, #0d1b2e 0%, #1a3358 55%, #1f6feb 140%);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+.hero h1 {
+  color: #fff;
+  margin: 0 0 .4rem;
+  font-size: 2.4rem;
+}
+.hero .subtitle {
+  color: #cfe0ff;
+  font-size: 1.15rem;
+  font-family: 'Inter', sans-serif;
+  margin: 0;
+}
+.hero .lede {
+  color: #e9f0fb;
+  margin-top: 1rem;
+  max-width: 60ch;
+}
+
+/* ---- Buttons ---- */
+.btn-accent, a.btn-accent {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff !important;
+  border: 0;
+  border-radius: 10px;
+  padding: .55rem 1.1rem;
+  font-weight: 600;
+  font-size: .95rem;
+  margin: .25rem .4rem .25rem 0;
+  box-shadow: 0 2px 6px rgba(31,111,235,.25);
+}
+.btn-accent:hover, a.btn-accent:hover {
+  background: var(--accent-dark);
+  color: #fff !important;
+  border-bottom: 0;
+  transform: translateY(-1px);
+  transition: transform .12s ease, background .15s ease;
+}
+.btn-ghost, a.btn-ghost {
+  display: inline-block;
+  background: transparent;
+  color: var(--accent) !important;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: .55rem 1.1rem;
+  font-weight: 600;
+  font-size: .95rem;
+  margin: .25rem .4rem .25rem 0;
+}
+.btn-ghost:hover, a.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent-dark) !important;
+  background: var(--accent-soft);
+}
+
+/* ---- "Card" treatment for content blocks ---- */
+.card {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.8rem;
+  margin: 1.4rem 0;
+  box-shadow: var(--shadow);
+}
+.card h2, .card h3 { margin-top: .2rem; border-bottom: 0; }
+
+/* ---- Tech badges: wrap `inline code` in project pages nicely ---- */
+code {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border-radius: 6px;
+  padding: .12em .45em;
+  font-size: .85em;
+  font-family: 'SFMono-Regular', Menlo, Consolas, monospace;
+}
+
+/* ---- Lists ---- */
+ul { padding-left: 1.3rem; }
+li { margin: .35rem 0; }
+
+/* ---- Blockquote (used sparingly) ---- */
+blockquote {
+  border-left: 3px solid var(--accent);
+  background: var(--bg-alt);
+  color: var(--ink-soft);
+  border-radius: 0 10px 10px 0;
+  padding: .8rem 1.2rem;
+}
+
+/* ---- Images / plots ---- */
+img { border-radius: 10px; max-width: 100%; }
+
+/* ---- Tables ---- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.2rem 0;
+}
+th, td { padding: .6rem .8rem; border-bottom: 1px solid var(--line); text-align: left; }
+th { color: var(--ink); font-weight: 600; background: var(--bg-alt); }
+
+/* ---- Small responsive tweaks ---- */
+@media (max-width: 600px) {
+  .hero { padding: 2rem 1.3rem; }
+  .hero h1 { font-size: 1.8rem; }
+  h1 { font-size: 1.7rem; }
+}
+
+/* ---- Footer spacing ---- */
+.main-container { padding-bottom: 4rem; }
+
+/* ============================================================
+   Profile photos (hero avatar + About page headshot)
+   ============================================================ */
+
+/* ---- Hero becomes a two-column layout with the avatar ---- */
+.hero {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+.hero-text { flex: 1 1 auto; min-width: 0; }
+
+.hero-avatar {
+  flex: 0 0 auto;
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid rgba(255,255,255,.85);
+  box-shadow: 0 8px 24px rgba(16,24,40,.25);
+}
+
+/* Stack vertically on small screens */
+@media (max-width: 600px) {
+  .hero {
+    flex-direction: column;
+    text-align: center;
+    gap: 1.2rem;
+  }
+  .hero-avatar { width: 110px; height: 110px; }
+}
+
+/* ---- About page: photo beside the Professional Profile ---- */
+.profile-card {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+.profile-photo {
+  flex: 0 0 auto;
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center top;
+  border: 3px solid var(--accent-soft);
+  box-shadow: var(--shadow);
+}
+.profile-text { flex: 1 1 auto; min-width: 0; }
+
+@media (max-width: 600px) {
+  .profile-card { flex-direction: column; text-align: center; }
+  .profile-photo { width: 120px; height: 120px; }
+}

@@ -2,20 +2,45 @@
 title: "Anar Battaivan | Portfolio & Statistics"
 ---
 
-# Welcome!
+```{=html}
+<div class="hero">
+  <img class="hero-avatar" src="images/anar.jpg"
+       alt="Portrait of Anar Battaivan"
+       onerror="this.style.display='none'" />
+  <div class="hero-text">
+    <h1>Anar Battaivan</h1>
+    <p class="subtitle">Statistician · Data Science · Statistical Software Engineering</p>
+    <p class="lede">
+      I bridge the gap between theoretical mathematical frameworks and practical,
+      high-performance software tools &mdash; from custom R packages to large-scale
+      experimental analysis.
+    </p>
+    <p style="margin:1.4rem 0 0;">
+      <a class="btn-accent" href="projects.html">View My Projects</a>
+      <a class="btn-ghost" href="about.html">About Me</a>
+    </p>
+  </div>
+</div>
+```
 
-I am a **Statistics graduate** from the Ludwig-Maximilians-Universität München (LMU) specializing in data science, statistical modeling, and computational methods. 
+I am a **Statistics graduate** from the Ludwig-Maximilians-Universität München (LMU) specializing in data science, statistical modeling, and computational methods.
 
-My work bridges the gap between theoretical mathematical frameworks and practical, high-performance software tools. 
+My work bridges the gap between theoretical mathematical frameworks and practical, high-performance software tools.
 
-### Core Specializations & Project Highlights:
-*   **Statistical Software Engineering**: Developed custom R-packages from scratch for complex workflows like Multidimensional Scaling (MDS).
-*   **Privacy & Machine Learning**: Evaluated synthetic data generation pipelines using Classification and Regression Trees (CART) on major panel data.
-*   **E-Commerce A/B-Testing**: Conducted massive-scale web traffic analysis using both Frequentist and Bayesian estimation methods.
+## Core Specializations & Project Highlights
 
----
+```{=html}
+<div class="card">
+```
+*   **Statistical Software Engineering** — Developed custom R-packages from scratch for complex workflows like Multidimensional Scaling (MDS).
+*   **Privacy & Machine Learning** — Evaluated synthetic data generation pipelines using Classification and Regression Trees (CART) on major panel data.
+*   **E-Commerce A/B-Testing** — Conducted massive-scale web traffic analysis using both Frequentist and Bayesian estimation methods.
+```{=html}
+</div>
+```
 
-### Explore My Work
+## Explore My Work
+
 * Check out my comprehensive **[Projects Page](projects.html)** to see my code repositories, interactive frameworks, and exploratory analysis reports.
 
 * Learn more about my academic background, technical competencies, and professional journey on my **[About Me](about.html)** page.

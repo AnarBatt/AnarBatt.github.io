@@ -32,6 +32,9 @@
 <script src="site_libs/navigation-1.1/tabsets.js"></script>
 <link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
 <script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <style type="text/css">
   code{white-space: pre-wrap;}
@@ -58,6 +61,7 @@ if (window.hljs) {
 
 
 
+<link rel="stylesheet" href="styles.css" type="text/css" />
 
 
 
@@ -238,7 +242,7 @@ $(document).ready(function () {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="index.html">My Portfolio</a>
+      <a class="navbar-brand" href="index.html">Anar Battaivan</a>
     </div>
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
@@ -269,31 +273,48 @@ Statistics</h1>
 </div>
 
 
-<div id="welcome" class="section level1">
-<h1>Welcome!</h1>
+<div class="hero">
+  <img class="hero-avatar" src="images/anar.jpg"
+       alt="Portrait of Anar Battaivan"
+       onerror="this.style.display='none'" />
+  <div class="hero-text">
+    <h1>Anar Battaivan</h1>
+    <p class="subtitle">Statistician · Data Science · Statistical Software Engineering</p>
+    <p class="lede">
+      I bridge the gap between theoretical mathematical frameworks and practical,
+      high-performance software tools &mdash; from custom R packages to large-scale
+      experimental analysis.
+    </p>
+    <p style="margin:1.4rem 0 0;">
+      <a class="btn-accent" href="projects.html">View My Projects</a>
+      <a class="btn-ghost" href="about.html">About Me</a>
+    </p>
+  </div>
+</div>
 <p>I am a <strong>Statistics graduate</strong> from the
 Ludwig-Maximilians-Universität München (LMU) specializing in data
 science, statistical modeling, and computational methods.</p>
 <p>My work bridges the gap between theoretical mathematical frameworks
 and practical, high-performance software tools.</p>
 <div id="core-specializations-project-highlights"
-class="section level3">
-<h3>Core Specializations &amp; Project Highlights:</h3>
+class="section level2">
+<h2>Core Specializations &amp; Project Highlights</h2>
+<div class="card">
 <ul>
-<li><strong>Statistical Software Engineering</strong>: Developed custom
+<li><strong>Statistical Software Engineering</strong> — Developed custom
 R-packages from scratch for complex workflows like Multidimensional
 Scaling (MDS).</li>
-<li><strong>Privacy &amp; Machine Learning</strong>: Evaluated synthetic
-data generation pipelines using Classification and Regression Trees
-(CART) on major panel data.</li>
-<li><strong>E-Commerce A/B-Testing</strong>: Conducted massive-scale web
-traffic analysis using both Frequentist and Bayesian estimation
+<li><strong>Privacy &amp; Machine Learning</strong> — Evaluated
+synthetic data generation pipelines using Classification and Regression
+Trees (CART) on major panel data.</li>
+<li><strong>E-Commerce A/B-Testing</strong> — Conducted massive-scale
+web traffic analysis using both Frequentist and Bayesian estimation
 methods.</li>
 </ul>
-<hr />
 </div>
-<div id="explore-my-work" class="section level3">
-<h3>Explore My Work</h3>
+</div>
+<div id="explore-my-work" class="section level2">
+<h2>Explore My Work</h2>
 <ul>
 <li><p>Check out my comprehensive <strong><a
 href="projects.html">Projects Page</a></strong> to see my code
@@ -303,7 +324,6 @@ reports.</p></li>
 and professional journey on my <strong><a href="about.html">About
 Me</a></strong> page.</p></li>
 </ul>
-</div>
 </div>
 
 
