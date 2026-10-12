@@ -34,7 +34,7 @@ Developed as part of my Bachelor's thesis at LMU, this project provides data-pri
 *   **Privacy Guardrails:** Conducted strict data-leakage and re-identification disclosure risk testing using mathematical $k$-anonymity and $l$-diversity checks.
 
 <a class="btn-accent" href="docs/Anar_Battaivan_thesis_SOEP_digital.pdf">Read Full Bachelor Thesis (PDF)</a>
-<a class="btn-ghost" href=https://github.com/AnarBatt/Bachelorarbeit>Code Repository</a>
+<a class="btn-ghost" href="https://github.com/AnarBatt/Bachelorarbeit">Code Repository</a>
 ```{=html}
 </div>
 ```
