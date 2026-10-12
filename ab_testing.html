@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>State-of-the-Art A/B Testing Framework for E-Commerce</title>
+
+<script src="site_libs/header-attrs-2.31/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/textmate.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<script src="site_libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="site_libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "\e258";
+  font-family: 'Glyphicons Halflings';
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Anar Battaivan</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="projects.html">Projects</a>
+</li>
+<li>
+  <a href="about.html">About Me</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">State-of-the-Art A/B Testing Framework for
+E-Commerce</h1>
+
+</div>
+
+
+<div id="overview" class="section level2">
+<h2>Overview</h2>
+<p>This project establishes an end-to-end statistical framework for
+evaluating user-interface experiments in high-traffic e-commerce
+environments. Using a <strong>synthetically generated</strong>
+multi-variant A/B experiment that evaluates product grid display density
+(Control: 4-column layout, Variant A: 3-column layout, Variant B:
+5-column layout), we assess primary Key Performance Indicators (KPIs)
+through both <strong>Frequentist</strong> and <strong>Bayesian</strong>
+statistical paradigms.</p>
+<blockquote>
+<p><strong>Note on data:</strong> All data in this report is simulated.
+The framework is intended to demonstrate a production-grade analysis
+pipeline using only generic, self-generated datasets — no proprietary or
+confidential data is used.</p>
+</blockquote>
+<hr />
+</div>
+<div id="key-insights" class="section level2">
+<h2>Key Insights</h2>
+<ul>
+<li><strong>Bayesian vs. Frequentist dynamics.</strong> Classical
+Frequentist null-hypothesis significance testing (NHST) provides rigid
+Type I error controls, while Bayesian inference delivers intuitive
+probability statements (e.g., <span
+class="math inline">\(P(\text{Variant B} &gt; \text{Control})\)</span>)
+that align better with commercial decision-making under
+uncertainty.</li>
+<li><strong>KPI trade-offs.</strong> Optimizing for conversion rate
+alone can be misleading if Average Order Value (AOV) is suppressed.
+Revenue per Visitor (RPV) serves as the unifying composite metric.</li>
+<li><strong>Heterogeneity &amp; segmentation.</strong> Aggregate
+experiment results often mask meaningful subgroup variance across
+technical factors such as screen resolution, browser rendering engines,
+and acquisition channels.</li>
+</ul>
+<hr />
+</div>
+<div id="experiment-setup-data-simulation" class="section level1">
+<h1>Experiment Setup &amp; Data Simulation</h1>
+<p>To maintain strict data-privacy compliance while demonstrating a
+realistic analysis pipeline, this project uses a synthetically generated
+dataset modeling 100,000 unique user sessions across three
+random-assignment branches.</p>
+<pre class="r"><code>set.seed(42)
+
+n_sessions &lt;- 100000
+
+# Experiment allocation
+variants &lt;- c(&quot;Control (4-Col)&quot;, &quot;Variant A (3-Col)&quot;, &quot;Variant B (5-Col)&quot;)
+alloc_prob &lt;- c(0.34, 0.33, 0.33)
+
+# Generate synthetic session records
+experiment_data &lt;- tibble(
+  visitor_id      = sprintf(&quot;VIS-%06d&quot;, 1:n_sessions),
+  period          = sample(1:5, size = n_sessions, replace = TRUE,
+                           prob = c(0.2, 0.2, 0.2, 0.2, 0.2)),
+  variant         = factor(sample(variants, size = n_sessions, replace = TRUE,
+                                  prob = alloc_prob), levels = variants),
+  browser         = sample(c(&quot;Chrome&quot;, &quot;Safari&quot;, &quot;Edge&quot;, &quot;Firefox&quot;),
+                           size = n_sessions, replace = TRUE,
+                           prob = c(0.55, 0.25, 0.12, 0.08)),
+  screen_category = sample(c(&quot;Desktop Wide&quot;, &quot;Desktop Standard&quot;),
+                           size = n_sessions, replace = TRUE,
+                           prob = c(0.6, 0.4)),
+  channel         = sample(c(&quot;Paid Search&quot;, &quot;Organic Search&quot;, &quot;Direct&quot;, &quot;Paid Social&quot;),
+                           size = n_sessions, replace = TRUE,
+                           prob = c(0.35, 0.30, 0.20, 0.15))
+) %&gt;%
+  mutate(
+    # True underlying probabilities for synthetic generation
+    base_cr = case_when(
+      variant == &quot;Control (4-Col)&quot;   ~ 0.0490,
+      variant == &quot;Variant A (3-Col)&quot; ~ 0.0495,
+      variant == &quot;Variant B (5-Col)&quot; ~ 0.0505
+    ),
+    converted = rbinom(n_sessions, 1, base_cr),
+    # Revenue follows a log-normal distribution for converted visits
+    revenue = if_else(
+      converted == 1,
+      rlnorm(n_sessions, meanlog = log(80), sdlog = 0.5),
+      0
+    )
+  )</code></pre>
+<pre class="r"><code># Preview aggregated metrics
+experiment_summary &lt;- experiment_data %&gt;%
+  group_by(variant) %&gt;%
+  summarize(
+    Visitors        = n(),
+    Conversions     = sum(converted),
+    Conversion_Rate = mean(converted),
+    Total_Revenue   = sum(revenue),
+    AOV             = sum(revenue) / sum(converted),
+    RPV             = sum(revenue) / n(),
+    .groups = &quot;drop&quot;
+  )
+
+kable(experiment_summary, digits = 4, caption = &quot;Overall Sample KPI Overview&quot;) %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;, &quot;condensed&quot;))</code></pre>
+<table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<caption>
+Overall Sample KPI Overview
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+variant
+</th>
+<th style="text-align:right;">
+Visitors
+</th>
+<th style="text-align:right;">
+Conversions
+</th>
+<th style="text-align:right;">
+Conversion_Rate
+</th>
+<th style="text-align:right;">
+Total_Revenue
+</th>
+<th style="text-align:right;">
+AOV
+</th>
+<th style="text-align:right;">
+RPV
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Control (4-Col)
+</td>
+<td style="text-align:right;">
+34183
+</td>
+<td style="text-align:right;">
+1669
+</td>
+<td style="text-align:right;">
+0.0488
+</td>
+<td style="text-align:right;">
+150630.2
+</td>
+<td style="text-align:right;">
+90.2518
+</td>
+<td style="text-align:right;">
+4.4066
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Variant A (3-Col)
+</td>
+<td style="text-align:right;">
+32922
+</td>
+<td style="text-align:right;">
+1604
+</td>
+<td style="text-align:right;">
+0.0487
+</td>
+<td style="text-align:right;">
+143691.4
+</td>
+<td style="text-align:right;">
+89.5832
+</td>
+<td style="text-align:right;">
+4.3646
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Variant B (5-Col)
+</td>
+<td style="text-align:right;">
+32895
+</td>
+<td style="text-align:right;">
+1616
+</td>
+<td style="text-align:right;">
+0.0491
+</td>
+<td style="text-align:right;">
+145891.7
+</td>
+<td style="text-align:right;">
+90.2795
+</td>
+<td style="text-align:right;">
+4.4351
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="primary-metrics-definition" class="section level1">
+<h1>Primary Metrics Definition</h1>
+<p>E-commerce experiment analysis relies on two distinct classes of
+KPIs:</p>
+<p><strong>1. Binary metrics (Conversion Rate):</strong></p>
+<p><span class="math display">\[\text{Conversion Rate (CR)} =
+\frac{\text{Total Purchases}}{\text{Total Visitors}}\]</span></p>
+<p><strong>2. Non-binary / continuous metrics (AOV &amp;
+RPV):</strong></p>
+<p><span class="math display">\[\text{Average Order Value (AOV)} =
+\frac{\text{Total Revenue}}{\text{Total Purchases}}\]</span></p>
+<p><span class="math display">\[\text{Revenue per Visitor (RPV)} =
+\frac{\text{Total Revenue}}{\text{Total Visitors}} = \text{CR} \times
+\text{AOV}\]</span></p>
+</div>
+<div id="frequentist-analysis-pipeline" class="section level1">
+<h1>Frequentist Analysis Pipeline</h1>
+<p>The classical Frequentist framework evaluates hypotheses under the
+assumption of fixed parameter values and zero prior information.</p>
+<div id="conversion-rate-chi2-test-of-independence"
+class="section level2">
+<h2>1. Conversion Rate (<span class="math inline">\(\chi^2\)</span> Test
+of Independence)</h2>
+<ul>
+<li><span class="math inline">\(H_0\)</span>: Conversion likelihood is
+independent of layout variant.</li>
+<li><span class="math inline">\(H_1\)</span>: Layout variant influences
+conversion likelihood.</li>
+</ul>
+<pre class="r"><code>cr_table   &lt;- table(experiment_data$variant, experiment_data$converted)
+chisq_res  &lt;- chisq.test(cr_table)
+chisq_res</code></pre>
+<pre><code>## 
+##  Pearson&#39;s Chi-squared test
+## 
+## data:  cr_table
+## X-squared = 0.062636, df = 2, p-value = 0.9692</code></pre>
+</div>
+<div id="average-order-value-log-normal-anova" class="section level2">
+<h2>2. Average Order Value (Log-Normal ANOVA)</h2>
+<p>Because purchase amounts exhibit right-skewness, monetary values are
+log-transformed prior to testing differences in means via Analysis of
+Variance (ANOVA).</p>
+<pre class="r"><code>converted_data &lt;- experiment_data %&gt;%
+  filter(converted == 1) %&gt;%
+  mutate(log_revenue = log(revenue))
+
+aov_fit &lt;- aov(log_revenue ~ variant, data = converted_data)
+summary(aov_fit)</code></pre>
+<pre><code>##               Df Sum Sq Mean Sq F value Pr(&gt;F)
+## variant        2    0.1 0.03198    0.13  0.878
+## Residuals   4886 1204.7 0.24656</code></pre>
+</div>
+<div id="revenue-per-visitor-kruskal-wallis-non-parametric-test"
+class="section level2">
+<h2>3. Revenue per Visitor (Kruskal-Wallis Non-Parametric Test)</h2>
+<p>RPV contains a large zero-inflation spike due to non-converting
+visitors. We apply the non-parametric Kruskal-Wallis test to evaluate
+differences in distribution locations across variants.</p>
+<pre class="r"><code>kruskal.test(revenue ~ variant, data = experiment_data)</code></pre>
+<pre><code>## 
+##  Kruskal-Wallis rank sum test
+## 
+## data:  revenue by variant
+## Kruskal-Wallis chi-squared = 0.07434, df = 2, p-value = 0.9635</code></pre>
+</div>
+</div>
+<div id="multiple-comparison-problem-error-quantification"
+class="section level1">
+<h1>Multiple Comparison Problem &amp; Error Quantification</h1>
+<p>When conducting statistical tests across multiple variants or
+subgroups, the probability of at least one false positive (Type I error)
+inflates rapidly:</p>
+<p><span class="math display">\[P(\text{At least 1 Type I Error}) = 1 -
+(1 - \alpha)^k\]</span></p>
+<p>where <span class="math inline">\(\alpha = 0.05\)</span> and <span
+class="math inline">\(k\)</span> is the number of comparative hypothesis
+tests.</p>
+<pre class="r"><code>k_tests        &lt;- 1:20
+fwer_inflation &lt;- 1 - (1 - 0.05)^k_tests
+
+tibble(Tests = k_tests, FWER = fwer_inflation) %&gt;%
+  ggplot(aes(x = Tests, y = FWER)) +
+  geom_line(color = &quot;#e74c3c&quot;, size = 1) +
+  geom_point(color = &quot;#c0392b&quot;, size = 2) +
+  scale_y_continuous(labels = scales::percent) +
+  theme_minimal() +
+  labs(
+    title = &quot;Family-Wise Error Rate (FWER) Inflation&quot;,
+    x = &quot;Number of Simultaneous Hypothesis Tests (k)&quot;,
+    y = &quot;Probability of At Least One Type I Error&quot;
+  )</code></pre>
+<pre><code>## Warning: Using `size` aesthetic for lines was deprecated
+## in ggplot2 3.4.0.
+## ℹ Please use `linewidth` instead.
+## This warning is displayed once per session.
+## Call `lifecycle::last_lifecycle_warnings()` to
+## see where this warning was generated.</code></pre>
+<p><img src="ab_testing_files/figure-html/fwer-plot-1.png" alt="" width="672" /></p>
+<div id="multiple-testing-adjustments" class="section level2">
+<h2>Multiple Testing Adjustments</h2>
+<p>To control for multi-variant and subgroup testing, we implement both
+Holm-Bonferroni (FWER control) and Benjamini-Hochberg (False Discovery
+Rate control) correction procedures:</p>
+<pre class="r"><code>raw_pvalues &lt;- c(0.012, 0.038, 0.094, 0.150, 0.003, 0.220)
+
+adjusted_table &lt;- tibble(
+  Test            = paste(&quot;Comparison&quot;, 1:length(raw_pvalues)),
+  Raw_P           = raw_pvalues,
+  Holm_Adjusted   = p.adjust(raw_pvalues, method = &quot;holm&quot;),
+  BH_FDR_Adjusted = p.adjust(raw_pvalues, method = &quot;BH&quot;)
+)
+
+kable(adjusted_table, digits = 4, caption = &quot;Comparison of P-Value Adjustment Methods&quot;) %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<caption>
+Comparison of P-Value Adjustment Methods
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Test
+</th>
+<th style="text-align:right;">
+Raw_P
+</th>
+<th style="text-align:right;">
+Holm_Adjusted
+</th>
+<th style="text-align:right;">
+BH_FDR_Adjusted
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Comparison 1
+</td>
+<td style="text-align:right;">
+0.012
+</td>
+<td style="text-align:right;">
+0.060
+</td>
+<td style="text-align:right;">
+0.036
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Comparison 2
+</td>
+<td style="text-align:right;">
+0.038
+</td>
+<td style="text-align:right;">
+0.152
+</td>
+<td style="text-align:right;">
+0.076
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Comparison 3
+</td>
+<td style="text-align:right;">
+0.094
+</td>
+<td style="text-align:right;">
+0.282
+</td>
+<td style="text-align:right;">
+0.141
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Comparison 4
+</td>
+<td style="text-align:right;">
+0.150
+</td>
+<td style="text-align:right;">
+0.300
+</td>
+<td style="text-align:right;">
+0.180
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Comparison 5
+</td>
+<td style="text-align:right;">
+0.003
+</td>
+<td style="text-align:right;">
+0.018
+</td>
+<td style="text-align:right;">
+0.018
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Comparison 6
+</td>
+<td style="text-align:right;">
+0.220
+</td>
+<td style="text-align:right;">
+0.300
+</td>
+<td style="text-align:right;">
+0.220
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="bayesian-analysis-pipeline" class="section level1">
+<h1>Bayesian Analysis Pipeline</h1>
+<p>Bayesian experiment evaluation integrates prior beliefs with observed
+experimental evidence (the likelihood) to produce posterior distribution
+forecasts for decision parameters.</p>
+<div id="bayesian-conversion-rate-modeling-beta-binomial-conjugate"
+class="section level2">
+<h2>1. Bayesian Conversion Rate Modeling (Beta-Binomial Conjugate)</h2>
+<p>We model purchase conversion using a Beta prior <span
+class="math inline">\(\text{Beta}(\alpha, \beta)\)</span> updated
+sequentially through observed trial outcomes.</p>
+<ul>
+<li><strong>Prior:</strong> Weakly informative prior centered at a
+historical baseline conversion rate (<span class="math inline">\(\approx
+5\%\)</span>).</li>
+<li><strong>Posterior update:</strong> <span
+class="math inline">\(\text{Beta}(\alpha + \text{Conversions},\ \beta +
+\text{Non-Conversions})\)</span>.</li>
+</ul>
+<pre class="r"><code># Prior formulation (weak prior)
+alpha_prior &lt;- 50
+beta_prior  &lt;- 950
+
+# Sequential Bayesian update
+bayesian_cr &lt;- experiment_data %&gt;%
+  group_by(variant) %&gt;%
+  summarize(
+    trials     = n(),
+    successes  = sum(converted),
+    alpha_post = alpha_prior + successes,
+    beta_post  = beta_prior + (trials - successes),
+    mean_cr    = alpha_post / (alpha_post + beta_post),
+    .groups = &quot;drop&quot;
+  )
+
+# Posterior sampling to estimate probability to exceed Control
+n_samples &lt;- 50000
+
+draws_control  &lt;- rbeta(n_samples, bayesian_cr$alpha_post[1], bayesian_cr$beta_post[1])
+draws_variantA &lt;- rbeta(n_samples, bayesian_cr$alpha_post[2], bayesian_cr$beta_post[2])
+draws_variantB &lt;- rbeta(n_samples, bayesian_cr$alpha_post[3], bayesian_cr$beta_post[3])
+
+bayes_results &lt;- tibble(
+  Comparison = c(&quot;Variant A vs. Control&quot;, &quot;Variant B vs. Control&quot;),
+  Prob_Beat_Control = c(
+    mean(draws_variantA &gt; draws_control),
+    mean(draws_variantB &gt; draws_control)
+  ),
+  Expected_Relative_Lift = c(
+    mean((draws_variantA - draws_control) / draws_control),
+    mean((draws_variantB - draws_control) / draws_control)
+  )
+)
+
+kable(bayes_results, digits = 4, caption = &quot;Bayesian Posterior Decision Metrics&quot;) %&gt;%
+  kable_styling(bootstrap_options = c(&quot;striped&quot;, &quot;hover&quot;))</code></pre>
+<table class="table table-striped table-hover" style="margin-left: auto; margin-right: auto;">
+<caption>
+Bayesian Posterior Decision Metrics
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Comparison
+</th>
+<th style="text-align:right;">
+Prob_Beat_Control
+</th>
+<th style="text-align:right;">
+Expected_Relative_Lift
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Variant A vs. Control
+</td>
+<td style="text-align:right;">
+0.4766
+</td>
+<td style="text-align:right;">
+-0.0014
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Variant B vs. Control
+</td>
+<td style="text-align:right;">
+0.5685
+</td>
+<td style="text-align:right;">
+0.0065
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="visualizing-posterior-distributions" class="section level2">
+<h2>Visualizing Posterior Distributions</h2>
+<pre class="r"><code>tibble(
+  Control     = draws_control,
+  `Variant A` = draws_variantA,
+  `Variant B` = draws_variantB
+) %&gt;%
+  pivot_longer(cols = everything(), names_to = &quot;Branch&quot;, values_to = &quot;CR_Draw&quot;) %&gt;%
+  ggplot(aes(x = CR_Draw, fill = Branch)) +
+  geom_density(alpha = 0.4) +
+  scale_x_continuous(labels = scales::percent_format(accuracy = 0.01)) +
+  theme_minimal() +
+  scale_fill_manual(values = c(&quot;#34495e&quot;, &quot;#2980b9&quot;, &quot;#27ae60&quot;)) +
+  labs(
+    title = &quot;Posterior Conversion Probability Distributions&quot;,
+    x = &quot;Conversion Probability&quot;,
+    y = &quot;Density&quot;
+  )</code></pre>
+<p><img src="ab_testing_files/figure-html/posterior-plot-1.png" alt="" width="672" /></p>
+</div>
+</div>
+<div id="post-test-segmentation-analysis" class="section level1">
+<h1>Post-Test Segmentation Analysis</h1>
+<p>To detect heterogeneous experiment effects, we break down outcomes
+across technical user environments (browser type and screen
+category).</p>
+<pre class="r"><code>segment_summary &lt;- experiment_data %&gt;%
+  group_by(browser, variant) %&gt;%
+  summarize(
+    Visitors        = n(),
+    Conversion_Rate = mean(converted),
+    RPV             = sum(revenue) / n(),
+    .groups = &quot;drop&quot;
+  )
+
+ggplot(segment_summary, aes(x = browser, y = Conversion_Rate, fill = variant)) +
+  geom_bar(stat = &quot;identity&quot;, position = &quot;dodge&quot;) +
+  scale_y_continuous(labels = scales::percent_format(accuracy = 0.1)) +
+  theme_minimal() +
+  scale_fill_brewer(palette = &quot;Set2&quot;) +
+  labs(
+    title = &quot;Conversion Rate Breakdown by Browser Type&quot;,
+    x = &quot;Browser Engine&quot;,
+    y = &quot;Conversion Rate&quot;,
+    fill = &quot;Layout Variant&quot;
+  )</code></pre>
+<p><img src="ab_testing_files/figure-html/segmentation-1.png" alt="" width="672" /></p>
+</div>
+<div id="methodological-comparison-conclusion" class="section level1">
+<h1>Methodological Comparison &amp; Conclusion</h1>
+<table class="table table-striped table-hover table-condensed" style="margin-left: auto; margin-right: auto;">
+<caption>
+Frequentist vs. Bayesian Paradigms
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Feature
+</th>
+<th style="text-align:left;">
+Frequentist Paradigm
+</th>
+<th style="text-align:left;">
+Bayesian Paradigm
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Core Output
+</td>
+<td style="text-align:left;">
+P(Data &amp;#124; H0) — p-value, confidence interval
+</td>
+<td style="text-align:left;">
+P(Parameter &amp;#124; Data) — posterior probability distribution
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Business Decision Metric
+</td>
+<td style="text-align:left;">
+Reject / fail to reject the null hypothesis at alpha = 0.05
+</td>
+<td style="text-align:left;">
+Probability a variant outperforms control (e.g., probability of positive
+lift)
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Handling Multi-testing
+</td>
+<td style="text-align:left;">
+Explicit penalty algorithms (Holm, Benjamini-Hochberg)
+</td>
+<td style="text-align:left;">
+Naturally regularized via prior parameters
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sample-Size Sensitivity
+</td>
+<td style="text-align:left;">
+Fixed horizon required; prone to early-stopping bias
+</td>
+<td style="text-align:left;">
+Supports continuous sequential evaluation
+</td>
+</tr>
+</tbody>
+</table>
+<div id="strategic-recommendation" class="section level2">
+<h2>Strategic Recommendation</h2>
+<ol style="list-style-type: decimal">
+<li><strong>Adopt Bayesian decision rules for execution speed.</strong>
+For ongoing e-commerce iteration, the Bayesian paradigm provides
+actionable probability statements without requiring strict fixed-horizon
+experiment holds.</li>
+<li><strong>Implement dual-KPI monitoring.</strong> Always pair
+conversion-rate monitoring with average-order-value checks to prevent
+unintended revenue degradation when increasing grid density or interface
+element count.</li>
+</ol>
+<hr />
+<p><a href="projects.html">Back to Projects Page</a></p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
